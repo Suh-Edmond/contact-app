@@ -61,9 +61,10 @@ public static File createFile(){
     try{
 //      call to method getContactInfo
         con = newContact.getContactInfo();
-        writer.format("%s\t\t\t%s\t\t\t%s\t\t\t%s\t\t\t%s%n", con.getFirstName(),  con.getLastName(),con.getTelephoneNumber()
+        writer.format("%s\t\t\t%s\t\t\t%s\t\t\t%s\t\t   %s", con.getFirstName(),  con.getLastName(),con.getTelephoneNumber()
                 ,con.getUserEmail(), con.getAddress());//writing to file 
                confirmMessage = true;
+               writer.format("%n");
         }
         catch(FormatterClosedException ex){
         System.err.println(ex);
@@ -113,6 +114,11 @@ public static File createFile(){
                         
                     //call methodto delete a contact
                     case 3:
+//                        System.out.print("Enter First Name : ");
+//                        fName = input.next();
+//                        System.out.print("Enter Last Name : ");
+//                        lName = input.next();
+//                        DeleteContact(fName, lName);
                         System.out.print("Module not yet created\n");
                         break;
                         
@@ -166,13 +172,13 @@ public static  void readFile(){
    String line;
    try{
       buffer = new BufferedReader(new FileReader("Contact File.txt"));//initialising buffer
-      System.out.printf("%s\t\t%s\t\t%s\t\t\t%s\t\t\t\t\t%s\n", "First Name", "Last Name", "Telephone", "Email", "Address");
+      System.out.printf("%s\t\t%s\t\t%s\t\t\t%s\t\t\t     %s%n", "First Name", "Last Name", "Telephone", "Email", "Address");
       System.out.printf("--------------------------------------------------------------"
-        + "----------------------------------------------------------------------\n"); 
+        + "----------------------------------------------------------------------%n"); 
       while((line = buffer.readLine()) != null){ 
         System.out.println(line);//print out content of file by after line
         System.out.printf("--------------------------------------------------------------"
-        + "----------------------------------------------------------------------\n");  
+        + "----------------------------------------------------------------------%n");  
       }
    }catch(IOException e){
        System.out.printf("Fail to Read File Content\n", e);
@@ -211,7 +217,7 @@ public static void countContact(){
                 }
             }
         }//end of finally block
-        System.out.printf("\nNumber of Saved Contacts = %d\n", counter);//print number of lines
+        System.out.printf("%nNumber of Saved Contacts = %d%n", counter);//print number of lines
 }//end  of method count savedcontacts
 
 
@@ -250,29 +256,31 @@ public static void countContact(){
 //}//end of method updateContact
 
     
-////method  delete contact
-//    @SuppressWarnings({"Convert2Diamond", "UnnecessaryContinue"})
+//method  delete contact
+    @SuppressWarnings({"Convert2Diamond", "UnnecessaryContinue"})
 //    public static void DeleteContact(String fName, String lName){
 //       File temp = new File("tempFile.txt");
 //       PrintWriter pw;
 //       String currentLine;
 //       String contactName = fName + lName;
+//        
+//             
 //       try {
+//             
 //           pw = new PrintWriter(new FileWriter(temp, true));
 //           buffer = new BufferedReader(new FileReader("Contact File.txt"));
 //           while((currentLine = buffer.readLine()) != null){
-//               if(currentLine.contains(contactName)){
+//               String toLowerCase = currentLine.toLowerCase();
+//               if(toLowerCase.contains(contactName.toLowerCase())){
 //                   continue;
 //               }else{
-//                   pw.println(currentLine);
-//                   pw.printf("%n");
+//                  pw.format("%s", currentLine);
 //               }
 //           }
-//           pw.close();
-//           buffer.close();
-//           temp.renameTo(file);
+//             
+//  
 //       } catch (IOException ex) {
-//            Logger.getLogger(ContactFile1.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(ContactFile.class.getName()).log(Level.SEVERE, null, ex);
 //       }
 //        
 // 
@@ -285,15 +293,15 @@ public static  void findContact(String fName){
    String fNameLowerCase = fName.toLowerCase();//setting input string to lowercase
    try{
       buffer = new BufferedReader(new FileReader("Contact File.txt"));//initialise buffer object
-      System.out.printf("%s\t\t%s\t\t%s\t\t\t%s\t\t\t\t\t%s\n", "First Name", "Last Name", "Telephone", "Email", "Address");
+      System.out.printf("%s\t\t%s\t\t%s\t\t\t%s\t\t\t\t\t%s\t\t\t%n", "First Name", "Last Name", "Telephone", "Email", "Address");
       System.out.printf("--------------------------------------------------------------"
-        + "----------------------------------------------------------------------\n");
+        + "----------------------------------------------------------------------%n");
       while((line = buffer.readLine()) != null){ 
           String toLowerCase = line.toLowerCase();
             if(toLowerCase.contains(fNameLowerCase)){//check if input match any string in line from file
                 System.out.println(toLowerCase);
                 System.out.printf("--------------------------------------------------------------"
-                + "----------------------------------------------------------------------\n");
+                + "----------------------------------------------------------------------%n");
                  
             }//end of switch statement
       }//end of while loop
